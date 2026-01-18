@@ -1,0 +1,66 @@
+@font-face {
+  font-family: "Silkscreen";
+  src: url("/fonts/Silkscreen-Regular.ttf") format("woff2"),
+    url("/fonts/Silkscreen-Regular.ttf") format("woff");
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Silkscreen";
+  src: url("/fonts/Silkscreen-Bold.ttf") format("woff2"),
+    url("/fonts/Silkscreen-Bold.ttf") format("woff");
+  font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Kanit";
+  src: url("/fonts/Kanit-Regular.ttf") format("woff2"),
+    url("/fonts/Kanit-Regular.ttf") format("woff");
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Kanit";
+  src: url("/fonts/Kanit-Bold.ttf") format("woff2"),
+    url("/fonts/Kanit-Bold.ttf") format("woff");
+  font-weight: 700;
+  font-style: normal;
+}
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.main-font {
+  font-family: "Kanit", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+* {
+  font-family: "Kanit", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+/* Dark thin scrollbar – street style */
+.scrollbar-street {
+  scrollbar-width: thin;
+  scrollbar-color: #7f1d1d transparent;
+}
+
+.scrollbar-street::-webkit-scrollbar {
+  width: 6px;
+}
+
+.scrollbar-street::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.scrollbar-street::-webkit-scrollbar-thumb {
+  background-color: #7f1d1d;
+  border-radius: 9999px;
+}
