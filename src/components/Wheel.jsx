@@ -22,38 +22,44 @@ const Wheel = () => {
 
   const activePrize = prizes.find((p) => p.id === activePrizeId);
 
-  const spin = async () => {
-    if (!names.length || spinning || !activePrizeId) return;
+const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 
-    setSpinning(true);
-    setWinner(null);
+const spin = async () => {
+  if (!names.length || spinning || !activePrizeId) return;
 
-    // PURE RANDOM
-    const winnerIndex = Math.floor(Math.random() * names.length);
-    const winnerName = names[winnerIndex];
+  setSpinning(true);
+  setWinner(null);
 
-    // MARQUEE ROLL
-    const loops = names.length * 4;
-    const baseDelay = 90;
+  const winnerIndex = Math.floor(Math.random() * names.length);
+  const winnerName = names[winnerIndex];
 
-    for (let i = 0; i < loops; i++) {
-      setCurrentLabel(names[i % names.length]);
-      await new Promise((r) => setTimeout(r, baseDelay + i * 6));
-    }
+  const duration = 2500; // TOTAL animation time
+  const startTime = Date.now();
 
-    // FINAL LOCK
-    setCurrentLabel(winnerName);
-    setWinner(winnerName);
+  let index = Math.floor(Math.random() * names.length);
 
-    // Assign prize (also removes user + activates next prize)
-    setModalPrize(activePrize);
-    assignPrizeOwner(winnerName);
+  while (Date.now() - startTime < duration) {
+    setCurrentLabel(names[index % names.length]);
+    index++;
 
-    setSpinning(false);
+    const progress = (Date.now() - startTime) / duration;
 
-    // Show celebration modal
-    setShowModal(true);
-  };
+    // ease-out delay
+    const delay = 30 + 120 * Math.pow(progress, 2);
+
+    await sleep(delay);
+  }
+
+  // LAND ON WINNER
+  setCurrentLabel(winnerName);
+  setWinner(winnerName);
+
+  setModalPrize(activePrize);
+  assignPrizeOwner(winnerName);
+
+  setSpinning(false);
+  setShowModal(true);
+};
 
   return (
     <>
